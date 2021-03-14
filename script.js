@@ -4,17 +4,47 @@ const count = document.getElementById('count') // We use the getElementByID beca
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
-const ticketPrice = +movieSelect.value;
+let ticketPrice = +movieSelect.value;
 
 // update total and count
 function updateSelectedCount() {
 
     const selectedSeats = document.querySelectorAll('.row .seat.selected')
 
-    console.log(selectedSeats);
+    const seatsIndex = [...selectedSeats].map((seat) => {
+        [...seats].indexOf(seat)
+    })
+
+    // localStorage
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex))
+
+
+    console.log(seatsIndex)
+
+    const selectedSeatsCount = selectedSeats.length
+
+    count.innerText = selectedSeatsCount;
+    total.innerText = selectedSeatsCount * ticketPrice;
 }
 
 
+
+// Copy selected seats into an array
+// Map through array 
+// return a new array of Index
+
+
+// Movie select event
+
+movieSelect.addEventListener('change', e => {
+    ticketPrice = +e.target.value
+    updateSelectedCount();
+})
+
+
+
+
+// Seat click event
 container.addEventListener('click', (e) => {
     if (e.target.classList.contains('seat')
         && !e.target.classList.contains('occupied')) {
