@@ -4,15 +4,23 @@ const count = document.getElementById('count') // We use the getElementByID beca
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
-const ticketPrice = movieSelect.value;
+const ticketPrice = +movieSelect.value;
 
+// update total and count
+function updateSelectedCount() {
+
+    const selectedSeats = document.querySelectorAll('.row .seat.selected')
+
+    console.log(selectedSeats);
+}
 
 
 container.addEventListener('click', (e) => {
     if (e.target.classList.contains('seat')
         && !e.target.classList.contains('occupied')) {
-        console.log(e.target);
+        e.target.classList.toggle('selected');
 
+        updateSelectedCount();
     }
 
 })
